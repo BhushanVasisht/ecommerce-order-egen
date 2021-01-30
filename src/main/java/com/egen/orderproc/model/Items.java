@@ -10,6 +10,10 @@ public class Items {
     @NotNull
     private int order_item_qty;
 
+    public Items(){
+
+    }
+
     public Items(String order_item_name, int order_item_qty) {
         this.order_item_name = order_item_name;
         this.order_item_qty = order_item_qty;

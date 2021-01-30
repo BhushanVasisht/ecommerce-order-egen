@@ -10,6 +10,10 @@ public class BarePayment {
     private String order_billing_zip;
     private String order_payment_date;
 
+    public BarePayment(){
+
+    }
+
     public BarePayment(String order_payment_confirmation_number, String order_payment_method, String order_payment_date, String order_billing_addressline1, String order_billing_addressline2, String order_billing_city, String order_billing_state, String order_billing_zip) {
         this.order_payment_confirmation_number = order_payment_confirmation_number;
         this.order_payment_method = order_payment_method;
