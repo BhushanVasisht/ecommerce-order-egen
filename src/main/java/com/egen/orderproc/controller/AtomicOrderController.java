@@ -1,8 +1,7 @@
 package com.egen.orderproc.controller;
 
 import com.egen.orderproc.model.BareOrder;
-import com.egen.orderproc.service.AtomicOrderService;
-import com.sun.tools.internal.ws.wsdl.framework.DuplicateEntityException;
+import com.egen.orderproc.AtomicOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
@@ -20,7 +19,7 @@ public class AtomicOrderController {
     @Autowired private AtomicOrderService atomicOrderService;
 
     @RequestMapping(method = RequestMethod.GET, value = "/order/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    private BareOrder getOrderById(@PathVariable("id") String id, HttpServletRequest request, HttpServletResponse response)
+    BareOrder getOrderById(@PathVariable("id") String id, HttpServletRequest request, HttpServletResponse response)
     {
         if(id == null || id.length() == 0)
         {
@@ -49,7 +48,7 @@ public class AtomicOrderController {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/order", consumes = MediaType.APPLICATION_JSON_VALUE)
-    private ResponseEntity<String> createAtomicOrder(@RequestBody BareOrder newOrder) {
+    ResponseEntity<String> createAtomicOrder(@RequestBody BareOrder newOrder) {
         try{
             atomicOrderService.persistOrder(newOrder);
             return ResponseEntity.status(HttpStatus.OK).build();
@@ -65,7 +64,7 @@ public class AtomicOrderController {
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "/order/cancel/{id}")
-    private ResponseEntity<String> cancelAtomicOrder(@PathVariable(value = "id") String id) {
+    ResponseEntity<String> cancelAtomicOrder(@PathVariable(value = "id") String id) {
         if(atomicOrderService.cancelOrder(id)) return ResponseEntity.status(HttpStatus.OK).build();
         return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }

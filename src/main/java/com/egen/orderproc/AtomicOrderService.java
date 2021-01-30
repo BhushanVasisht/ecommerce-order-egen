@@ -1,4 +1,4 @@
-package com.egen.orderproc.service;
+package com.egen.orderproc;
 
 import com.egen.orderproc.model.*;
 import com.egen.orderproc.repository.ItemRepository;
@@ -24,7 +24,6 @@ public class AtomicOrderService {
     @Autowired
     private ItemRepository itemRepository;
 
-    @Transactional
     public BareOrder getOrder(String id) throws Exception {
         Orders ord = orderRepository.findById(id).orElse(null);
         if(ord != null) return this.convertOrdersToBare(ord);
@@ -85,6 +84,7 @@ public class AtomicOrderService {
         return bord;
     }
 
+    @Transactional
     public boolean cancelOrder(String id) {
         Orders ord = orderRepository.findById(id).orElse(null);
 

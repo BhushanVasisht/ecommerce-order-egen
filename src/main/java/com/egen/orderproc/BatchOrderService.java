@@ -1,4 +1,4 @@
-package com.egen.orderproc.service;
+package com.egen.orderproc;
 
 import com.egen.orderproc.model.*;
 import com.egen.orderproc.repository.OrderRepository;
