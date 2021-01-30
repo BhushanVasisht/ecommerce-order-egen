@@ -27,7 +27,8 @@ public class AtomicOrderService {
     @Transactional
     public BareOrder getOrder(String id) throws Exception {
         Orders ord = orderRepository.findById(id).orElse(null);
-        return this.convertOrdersToBare(ord);
+        if(ord != null) return this.convertOrdersToBare(ord);
+        return null;
     }
 
     public void persistOrder(BareOrder newOrder) throws Exception {
