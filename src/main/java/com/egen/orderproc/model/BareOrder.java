@@ -6,7 +6,7 @@ public class BareOrder {
 
     String order_id;
     String order_customer_id;
-    String order_status;
+    String order_status = "New";
     Double order_subtotal;
     Double order_tax;
     Double order_shipping_charges;

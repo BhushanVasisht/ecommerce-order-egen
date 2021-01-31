@@ -4,11 +4,13 @@ import com.egen.orderproc.model.*;
 import com.egen.orderproc.repository.ItemRepository;
 import com.egen.orderproc.repository.OrderRepository;
 import com.egen.orderproc.repository.PaymentRepository;
+import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.lang.model.UnknownEntityException;
 import java.sql.Date;
 import java.util.List;
 
@@ -31,7 +33,8 @@ public class AtomicOrderService {
     }
 
     public void persistOrder(BareOrder newOrder) throws Exception {
-        if(!orderRepository.findById(newOrder.getOrder_id()).isPresent())
+        if(newOrder.getOrder_id() == null) throw new NotFoundException("Id Missing");
+        else if(!orderRepository.findById(newOrder.getOrder_id()).isPresent())
         {
             this.convertBareToOrders(newOrder);
         }
